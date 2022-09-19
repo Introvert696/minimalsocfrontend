@@ -6,12 +6,14 @@
     <div class="time">
       <p>{{ time }}</p>
     </div>
-    <div class="menu">
+    <div class="menu" @click="exit">
       <p>Выход</p>
     </div>
   </div>
 </template>
 <script>
+import router from "@/router";
+
 export default {
   name: "MainHeader",
   computed: {
@@ -25,6 +27,10 @@ export default {
   methods: {
     openMainPages() {
       this.$router.push("/feed");
+    },
+    exit() {
+      localStorage.removeItem("token");
+      router.push("/");
     },
   },
 };
@@ -58,6 +64,7 @@ export default {
     font-size: 12px;
     color: #c0c0c0;
     margin-top: 0.2%;
+    cursor: pointer;
   }
 }
 </style>

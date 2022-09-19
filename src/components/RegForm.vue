@@ -14,17 +14,17 @@
     <InputField
       plchld="Введите имя"
       type="text"
-      v-on:setdatatoform="setPass"
+      v-on:setdatatoform="setName"
     ></InputField>
     <InputField
       plchld="Введите фамилию"
       type="text"
-      v-on:setdatatoform="setPass"
+      v-on:setdatatoform="setLastname"
     ></InputField>
     <InputField
       plchld="Введите дату рождения"
       type="date"
-      v-on:setdatatoform="setPass"
+      v-on:setdatatoform="setDate"
     ></InputField>
     <BtnAccept msg="Отправить"></BtnAccept>
   </form>
@@ -42,6 +42,9 @@ export default {
     return {
       login: "",
       password: "",
+      name: "",
+      lastname: "",
+      date: "",
     };
   },
   components: { InputField, BtnAccept },
@@ -52,6 +55,10 @@ export default {
     setPass(pass) {
       this.password = pass;
     },
+    setName(name) {
+      this.name = name;
+    },
+    set,
   },
 };
 </script>

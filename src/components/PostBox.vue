@@ -1,7 +1,7 @@
 <template>
   <div class="postbox">
     <div class="title-postbox">
-      <img src="@/assets/testImage.jpg" alt="" width="50" height="50" />
+      <img :src="photo" alt="" width="50" height="50" />
       <div class="text-title">
         <p>{{ creater }}</p>
         <span>{{ datecreate }}</span>
@@ -79,6 +79,7 @@ export default {
 }
 .likes {
   display: flex;
+  display: none;
   justify-content: space-between;
   padding-left: 30px;
   padding-right: 30px;

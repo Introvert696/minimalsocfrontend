@@ -1,5 +1,6 @@
 <template>
   <form action="#">
+    <h6 class="notcorrect">{{ info }}</h6>
     <div class="text"><p>Вход в аккаунт</p></div>
     <InputField
       plchld="Введите логин"
@@ -22,6 +23,7 @@
 import InputField from "./InputField.vue";
 import BtnAccept from "./BtnAccept.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "LoginForm",
   props: {
@@ -31,6 +33,8 @@ export default {
     return {
       login: "",
       password: "",
+      userData: "",
+      info: "",
     };
   },
   components: { InputField, BtnAccept },
@@ -51,11 +55,17 @@ export default {
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
-        .then(function (response) {
+        .then((response) => {
           //handle success
           console.log(response);
+          if (response.data != "") {
+            localStorage.token = response.data.token;
+            router.push("/feed");
+          } else {
+            this.info = "Неправильный логин или пароль";
+          }
         })
-        .catch(function (response) {
+        .catch((response) => {
           //handle error
           console.log(response);
         });
@@ -68,7 +78,7 @@ form {
   font-weight: 400;
   font-size: 16px;
   width: 304px;
-  height: 301px;
+  min-height: 301px;
   background: #ffffff;
   border: 1px solid #bfbfbf;
   border-radius: 20px;

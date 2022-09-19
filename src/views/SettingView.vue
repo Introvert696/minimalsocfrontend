@@ -26,6 +26,14 @@ export default {
     MyProfileMenu,
     SettingContent,
   },
+  mounted() {
+    if (typeof localStorage.token === "undefined") {
+      router.push("/");
+    } else {
+      this.getUserInfo();
+      this.setPosts();
+    }
+  },
 };
 </script>
 <style lang="scss">

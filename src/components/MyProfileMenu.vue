@@ -1,13 +1,13 @@
 <template>
   <img
-    src="@/assets/testImage.jpg"
+    :src="userimage"
     alt="profileImage"
     width="150"
     height="150"
     class="userprofile"
   />
   <div class="username">
-    <p>Name Lastname</p>
+    <p>{{ fio }}</p>
   </div>
   <div class="profile-menu">
     <a href="#/mail">Сообщение: 12</a>
@@ -21,6 +21,7 @@
 <script>
 export default {
   name: "MyProfileMenu",
+  props: ["mescount", "friendcount", "groupcount", "userimage", "fio"],
 };
 </script>
 <style lang="scss">
