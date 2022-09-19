@@ -11,7 +11,7 @@
       type="password"
       v-on:setdatatoform="setPass"
     ></InputField>
-    <BtnAccept msg="Войти"></BtnAccept>
+    <BtnAccept msg="Войти" @click="loginForm"></BtnAccept>
     <div class="reg-text">
       <a href="#/reg"><p>или зарегестрируйтесь</p></a>
     </div>
@@ -21,6 +21,7 @@
 <script>
 import InputField from "./InputField.vue";
 import BtnAccept from "./BtnAccept.vue";
+import axios from "axios";
 export default {
   name: "LoginForm",
   props: {
@@ -39,6 +40,25 @@ export default {
     },
     setPass(pass) {
       this.password = pass;
+    },
+    loginForm() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("login", this.login);
+      bodyFormData.append("password", this.password);
+      axios({
+        method: "post",
+        url: "http://localhost/authorize/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then(function (response) {
+          //handle success
+          console.log(response);
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
     },
   },
 };
