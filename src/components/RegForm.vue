@@ -1,5 +1,5 @@
 <template>
-  <form action="#">
+  <form action="">
     <div class="text"><p>Регистрация</p></div>
     <InputField
       plchld="Введите логин"
@@ -26,13 +26,14 @@
       type="date"
       v-on:setdatatoform="setDate"
     ></InputField>
-    <BtnAccept msg="Отправить"></BtnAccept>
+    <BtnAccept msg="Отправить" @click="regUser()"></BtnAccept>
   </form>
 </template>
 
 <script>
 import InputField from "./InputField.vue";
 import BtnAccept from "./BtnAccept.vue";
+import axios from "axios";
 export default {
   name: "RegForm",
   props: {
@@ -58,7 +59,37 @@ export default {
     setName(name) {
       this.name = name;
     },
-    set,
+    setLastname(lastname) {
+      this.lastname = lastname;
+    },
+    setDate(date) {
+      this.date = date;
+    },
+    regUser() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("name", this.name);
+      bodyFormData.append("lastname", this.lastname);
+      bodyFormData.append("date", this.date);
+      bodyFormData.append("login", this.login);
+      bodyFormData.append("password", this.password);
+      axios({
+        method: "post",
+        url: "http://localhost/register/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+
+          console.log(response.data);
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
   },
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="friendbox">
     <div class="left-fr">
-      <img src="@/assets/testImage.jpg" alt="" width="50" height="50" />
+      <img :src="img" alt="" width="50" height="50" />
     </div>
     <div class="right-fr">
-      <p @click="goToUserProfile(23)">{{ username }}</p>
+      <p @click="goToUserProfile(id)">{{ username }}</p>
       <span>Написать сообщение</span>
     </div>
   </div>
@@ -16,6 +16,8 @@ export default {
   name: "FriendBox",
   props: {
     username: String,
+    img: String,
+    id: "",
   },
   methods: {
     goToUserProfile(val) {

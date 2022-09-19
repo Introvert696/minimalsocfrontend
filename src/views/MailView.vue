@@ -5,29 +5,10 @@
     <CenterColumn>
       <CenterTitle title="Диалоги:" linkname="cоздать диалог"></CenterTitle>
       <MessageBox
+        v-for="mes in mesGroup"
         userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
-        userfio="Глад валакас"
-        mesdesc="Даб даб я"
-      ></MessageBox>
-      <MessageBox
-        userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
-        userfio="Глад валакас"
-        mesdesc="Даб даб я"
-      ></MessageBox>
-      <MessageBox
-        userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
-        userfio="Глад валакас"
-        mesdesc="Даб даб я"
-      ></MessageBox>
-      <MessageBox
-        userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
-        userfio="Глад валакас"
-        mesdesc="Даб даб я"
-      ></MessageBox>
-      <MessageBox
-        userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
-        userfio="Глад валакас"
-        mesdesc="Даб даб я"
+        :userfio="'Диалог: ' + mes.first_user + ' и ' + mes.twelf_user"
+        mesdesc="-"
       ></MessageBox>
     </CenterColumn>
     <RightColumn></RightColumn>
@@ -40,6 +21,7 @@ import RightColumn from "@/components/RightColumn.vue";
 import CenterColumn from "@/components/CenterColumn.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import CenterTitle from "@/components/CenterTitle.vue";
+import axios from "axios";
 export default {
   name: "MailView",
   components: {
@@ -50,12 +32,38 @@ export default {
     MessageBox,
     CenterTitle,
   },
+  data() {
+    return {
+      mesGroup: [],
+    };
+  },
+  methods: {
+    getUserMesGroup() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      axios({
+        method: "post",
+        url: "http://localhost/messages",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          this.mesGroup = response.data;
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
+  },
   mounted() {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
     } else {
-      this.getUserInfo();
-      this.setPosts();
+      this.getUserMesGroup();
     }
   },
 };

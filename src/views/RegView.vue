@@ -1,5 +1,5 @@
 <template>
-  <RegForm class="reg-form"></RegForm>
+  <RegForm class="reg-form" clickreg="setValue"></RegForm>
 </template>
 
 <script>
@@ -7,34 +7,16 @@ import RegForm from "@/components/RegForm.vue";
 export default {
   name: "RegView",
   components: { RegForm },
-  methods: {
-    setPosts() {
-      var bodyFormData = new FormData();
-      bodyFormData.append("token", localStorage.token);
-      axios({
-        method: "post",
-        url: "http://localhost/feedpost/",
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-        .then((response) => {
-          //handle success
-
-          console.log(response.data);
-
-          response.data.forEach((element) => {
-            console.log(element);
-            this.posts.push(element);
-          });
-          return response.data;
-        })
-        .catch((response) => {
-          //handle error
-          console.log(response);
-          return false;
-        });
-    },
+  data() {
+    return {
+      name: "",
+      lastname: "",
+      date: "",
+      login: "",
+      password: "",
+    };
   },
+  methods: {},
 };
 </script>
 <style>

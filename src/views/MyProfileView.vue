@@ -60,6 +60,7 @@ export default {
     setPosts() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
+
       axios({
         method: "post",
         url: "http://localhost/myposts/",

@@ -1,5 +1,5 @@
 <template>
-  <form action="#" class="postcreater">
+  <form action="#/myprofile" methods="POST" class="postcreater">
     <p>Новый пост:</p>
     <textarea
       name="postcontent"
@@ -7,15 +7,50 @@
       cols="30"
       rows="10"
       noframes
+      v-model="post_content"
     ></textarea>
     <div class="bottom-post">
-      <button type="submit">Создать</button>
+      <button @click="createPost">Создать</button>
     </div>
   </form>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "FormCreatePost",
+  data() {
+    return {
+      post_content: "",
+    };
+  },
+  methods: {
+    inputfield(inp) {
+      this.post_content = inp;
+    },
+    createPost() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("post_text", this.post_content);
+
+      axios({
+        method: "post",
+        url: "http://localhost/createpost/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          this.userinfo = response.data[0];
+
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -1,13 +1,13 @@
 <template>
   <img
-    src="@/assets/testImage.jpg"
+    :src="img"
     alt="profileImage"
     width="150"
     height="150"
     class="userprofile"
   />
   <div class="username">
-    <p>Name Lastname</p>
+    <p>{{ username }}</p>
   </div>
   <div class="profile-menu">
     <a href="">Написать сообщение</a>
@@ -20,6 +20,7 @@
 <script>
 export default {
   name: "UserProfileInfo",
+  props: ["img", "username"],
 };
 </script>
 <style lang="scss">

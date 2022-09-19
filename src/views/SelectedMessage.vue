@@ -33,8 +33,6 @@ export default {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
     } else {
-      this.getUserInfo();
-      this.setPosts();
     }
   },
 };
