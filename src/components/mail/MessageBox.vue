@@ -2,7 +2,7 @@
   <div class="message-box">
     <div class="title-mes">
       <p>{{ username }}</p>
-      <p class="mes-date">{{ date }}</p>
+      <p class="mes-date">{{ send_date }}</p>
     </div>
     <span
       ><p>{{ message }}</p></span
@@ -11,11 +11,11 @@
 </template>
 <script>
 export default {
-  name: "default",
+  name: "MessageBox",
   props: {
     username: String,
-    message: String,
-    date: String,
+    message: "",
+    send_date: String,
   },
 };
 </script>

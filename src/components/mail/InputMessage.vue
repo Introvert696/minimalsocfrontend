@@ -1,20 +1,33 @@
 <template>
-  <form action="#" class="inputmes">
+  <form method="post" @submit.prevent class="inputmes">
     <textarea
       name="message"
       id="message"
       cols="30"
       rows="10"
       placeholder="Введите текст сообщения..."
+      v-model="messagecontent"
     ></textarea>
     <div class="btn-send">
-      <button type="submit">отправить</button>
+      <button type="submit" @click="emmitInputValue">отправить</button>
     </div>
   </form>
 </template>
 <script>
 export default {
-  name: "default",
+  name: "InputMessage",
+  data() {
+    return {
+      messagecontent: "",
+    };
+  },
+  methods: {
+    emmitInputValue() {
+      if (this.messagecontent != "") {
+        this.$emit("sendmessage", this.messagecontent);
+      }
+    },
+  },
 };
 </script>
 <style lang="scss">

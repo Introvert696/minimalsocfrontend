@@ -6,7 +6,7 @@ import NotFoundView from "@/views/NotFoundView";
 import MyProfileView from "@/views/MyProfileView";
 import SettingView from "@/views/SettingView";
 import MailView from "@/views/MailView";
-import SelectedMessage from "@/views/SelectedMessage";
+import SelectedMessage from "@/views/SelectedMessageView";
 import FriendView from "@/views/FriendView";
 import GroupView from "@/views/GroupView";
 import DocsView from "@/views/DocsView";
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: "/mail/:id",
-    name: "selectMessage",
+    name: "SelectedMessageView",
     meta: { title: "Диалог" },
     component: SelectedMessage,
   },
