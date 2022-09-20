@@ -19,10 +19,11 @@ export default {
     userfio: String,
     mesdesc: String,
     userphoto: String,
+    mesgrid: "",
   },
   methods: {
     goToMess() {
-      router.push("/mail/34");
+      router.push("/mail/" + this.mesgrid);
     },
   },
 };

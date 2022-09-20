@@ -9,6 +9,7 @@
         userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
         :userfio="'Диалог: ' + mes.first_user + ' и ' + mes.twelf_user"
         mesdesc="-"
+        :mesgrid="mes.mgr_id"
       ></MessageBox>
     </CenterColumn>
     <RightColumn></RightColumn>

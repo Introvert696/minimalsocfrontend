@@ -6,9 +6,9 @@
       <CenterTitle title="Друзья:"></CenterTitle>
       <FriendBox
         v-for="friend in friends"
-        :username="friend.fio"
-        :img="friend.user_photo"
-        :id="friend.id"
+        :username="friend[0].fio"
+        :img="friend[0].user_photo"
+        :id="friend[0].id"
       ></FriendBox>
     </CenterColumn>
     <RightColumn></RightColumn>
@@ -50,7 +50,7 @@ export default {
       })
         .then((response) => {
           //handle success
-          this.friends = response.data[0];
+          this.friends = response.data;
 
           console.log(response.data);
 

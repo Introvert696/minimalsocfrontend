@@ -52,11 +52,11 @@ export default {
           //handle success
 
           console.log(response.data);
-
-          response.data.forEach((element) => {
-            console.log(element);
-            this.posts.push(element);
-          });
+          this.posts = response.data;
+          // response.data.forEach((element) => {
+          //   console.log(element);
+          //   this.posts.push(element);
+          // });
           return response.data;
         })
         .catch((response) => {
