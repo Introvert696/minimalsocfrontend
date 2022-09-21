@@ -9,6 +9,7 @@
         :username="friend[0].fio"
         :img="friend[0].user_photo"
         :id="friend[0].id"
+        v-on:writemessage="writeMessage"
       ></FriendBox>
     </CenterColumn>
     <RightColumn></RightColumn>
@@ -22,6 +23,7 @@ import RightColumn from "@/components/RightColumn.vue";
 import CenterTitle from "@/components/CenterTitle.vue";
 import FriendBox from "../components/friend/FriendBox.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "FriendView",
   components: {
@@ -38,6 +40,33 @@ export default {
     };
   },
   methods: {
+    writeMessage(id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("user_id", id);
+
+      axios({
+        method: "post",
+        url: "http://localhost/createdialog",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+
+          if (response.data) {
+            router.push("/mail/" + response.data["mgr_id"]);
+          }
+          console.log(response.data);
+
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     getUserFriends() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);

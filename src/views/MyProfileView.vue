@@ -20,6 +20,7 @@ import LeftColumn from "@/components/LeftColumn.vue";
 import MyProfileColumn from "@/components/MyProfileColumn.vue";
 import CenterColumn from "@/components/CenterColumn.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "MyProfileView",
   components: {

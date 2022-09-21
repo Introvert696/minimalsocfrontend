@@ -87,7 +87,7 @@ export default {
         })
         .catch((response) => {
           console.log(response.response.status);
-          router.push("/feed");
+
           return false;
         });
     },

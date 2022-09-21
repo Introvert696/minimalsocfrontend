@@ -5,7 +5,7 @@
     </div>
     <div class="right-fr">
       <p @click="goToUserProfile(id)">{{ username }}</p>
-      <span>Написать сообщение</span>
+      <span @click="senmes()">Написать сообщение</span>
     </div>
   </div>
 </template>
@@ -17,11 +17,14 @@ export default {
   props: {
     username: String,
     img: String,
-    id: "",
+    id: Number,
   },
   methods: {
     goToUserProfile(val) {
       router.push("/user/" + val);
+    },
+    senmes() {
+      this.$emit("writemessage", this.id);
     },
   },
 };
