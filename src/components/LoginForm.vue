@@ -51,7 +51,7 @@ export default {
       bodyFormData.append("password", this.password);
       axios({
         method: "post",
-        url: "http://localhost/authorize/",
+        url: "http://minimalsoc.eurodir.ru/authorize/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

@@ -4,10 +4,15 @@
     <LeftColumn></LeftColumn>
     <CenterColumn>
       <CenterTitle title="Поиск:" linkname="сброс" linkurl="#"></CenterTitle>
-      <SearchField></SearchField>
-      <FriendBox username="Иван Филатов"></FriendBox>
-      <GroupBox groupname="Stream inside"></GroupBox>
-      <DocumentBox namedoc="Музыка.mp4" sizedoc="23"></DocumentBox>
+      <SearchField v-on:getresult="getResult"></SearchField>
+      <FriendBox
+        v-for="user in queryData"
+        :username="user.name + ' ' + user.lastname"
+        :img="user.user_photo"
+      ></FriendBox>
+
+      <!-- <GroupBox groupname="Stream inside"></GroupBox>
+      <DocumentBox namedoc="Музыка.mp4" sizedoc="23"></DocumentBox> -->
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
@@ -22,6 +27,7 @@ import SearchField from "../components/search/SearchField.vue";
 import FriendBox from "@/components/friend/FriendBox.vue";
 import GroupBox from "@/components/group/GroupBox.vue";
 import DocumentBox from "@/components/docs/DocumentBox.vue";
+import axios from "axios";
 export default {
   name: "SearchView",
   components: {
@@ -34,6 +40,42 @@ export default {
     FriendBox,
     GroupBox,
     DocumentBox,
+  },
+  data() {
+    return {
+      queryData: "",
+    };
+  },
+  methods: {
+    getResult(val) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("query_string", val);
+
+      axios({
+        method: "post",
+        url: "http://minimalsoc.eurodir.ru/search/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+
+          console.log(response.data);
+          this.queryData = response.data;
+          a;
+          // response.data.forEach((element) => {
+          //   console.log(element);
+          //   this.posts.push(element);
+          // });
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
   },
   mounted() {
     if (typeof localStorage.token === "undefined") {

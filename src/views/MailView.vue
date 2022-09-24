@@ -44,7 +44,7 @@ export default {
       bodyFormData.append("token", localStorage.token);
       axios({
         method: "post",
-        url: "http://localhost/messages",
+        url: "http://minimalsoc.eurodir.ru/messages",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

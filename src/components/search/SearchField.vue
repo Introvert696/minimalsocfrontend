@@ -1,12 +1,23 @@
 <template>
-  <form class="inputField">
-    <input type="text" name="" id="" />
-    <button type="submit">Поиск</button>
+  <form class="inputField" @submit.prevent>
+    <input type="text" name="" id="" v-model="queryString" />
+    <button type="submit" @click="searchEmmit">Поиск</button>
   </form>
 </template>
 <script>
 export default {
   name: "SearchField",
+  data() {
+    return {
+      queryString: "",
+    };
+  },
+  methods: {
+    searchEmmit() {
+      //alert(this.queryString);
+      this.$emit("getresult", this.queryString);
+    },
+  },
 };
 </script>
 <style lang="scss">

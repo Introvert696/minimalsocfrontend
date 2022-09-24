@@ -55,7 +55,7 @@ export default {
       bodyFormData.append("content", message);
       axios({
         method: "post",
-        url: "http://localhost/sendmessage/",
+        url: "http://minimalsoc.eurodir.ru/sendmessage/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -77,7 +77,7 @@ export default {
       bodyFormData.append("selected_mail_group", this.$route.params.id);
       axios({
         method: "post",
-        url: "http://localhost/messages/",
+        url: "http://minimalsoc.eurodir.ru/messages/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
