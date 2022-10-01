@@ -51,7 +51,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/userprofile",
+        url: "http://localhost/userprofile",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -77,7 +77,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/myposts",
+        url: "http://localhost/myposts",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

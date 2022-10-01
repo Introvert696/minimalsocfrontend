@@ -9,6 +9,8 @@
         v-for="user in queryData"
         :username="user.name + ' ' + user.lastname"
         :img="user.user_photo"
+        :id="user.id"
+        v-on:writemessage="writeMessage"
       ></FriendBox>
 
       <!-- <GroupBox groupname="Stream inside"></GroupBox>
@@ -28,6 +30,7 @@ import FriendBox from "@/components/friend/FriendBox.vue";
 import GroupBox from "@/components/group/GroupBox.vue";
 import DocumentBox from "@/components/docs/DocumentBox.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "SearchView",
   components: {
@@ -47,6 +50,33 @@ export default {
     };
   },
   methods: {
+    writeMessage(id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("user_id", id);
+
+      axios({
+        method: "post",
+        url: "http://localhost/createdialog",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+
+          if (response.data) {
+            router.push("/mail/" + response.data["mgr_id"]);
+          }
+          console.log(response.data);
+
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     getResult(val) {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
@@ -54,7 +84,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/search/",
+        url: "http://localhost/search/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -63,7 +93,6 @@ export default {
 
           console.log(response.data);
           this.queryData = response.data;
-          a;
           // response.data.forEach((element) => {
           //   console.log(element);
           //   this.posts.push(element);

@@ -1,12 +1,12 @@
 <template>
   <div class="right-column">
-    <p><a href="#/myprofile">Мой профиль</a></p>
-    <p><a href="#/feed">Новости</a></p>
-    <p><a href="#/mail">Сообщения</a></p>
-    <p><a href="#/friend">Друзья</a></p>
-    <p><a href="#/groups">Группы</a></p>
-    <p><a href="#/docs">Документы</a></p>
-    <p><a href="#/search">Поиск</a></p>
+    <p><a href="/myprofile">Мой профиль</a></p>
+    <p><a href="/feed">Новости</a></p>
+    <p><a href="/mail">Сообщения</a></p>
+    <p><a href="/friend">Друзья</a></p>
+    <p><a href="/groups">Группы</a></p>
+    <p><a href="/docs">Документы</a></p>
+    <p><a href="/search">Поиск</a></p>
   </div>
 </template>
 <script>

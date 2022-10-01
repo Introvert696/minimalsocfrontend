@@ -51,7 +51,7 @@ export default {
       bodyFormData.append("password", this.password);
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/authorize/",
+        url: "http://localhost/authorize/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -60,11 +60,12 @@ export default {
           console.log(response);
           if (response.data != "") {
             localStorage.token = response.data.token;
-            router.push("/feed");
           } else {
             this.info = "Неправильный логин или пароль";
           }
+          router.push("/feed");
         })
+
         .catch((response) => {
           //handle error
           console.log(response);

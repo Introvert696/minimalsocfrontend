@@ -4,8 +4,8 @@
       <img :src="img" alt="" width="50" height="50" />
     </div>
     <div class="right-fr">
-      <p @click="goToUserProfile(id)">{{ username }}</p>
-      <span @click="senmes()">Написать сообщение</span>
+      <p @click="goToUserProfile">{{ username }}</p>
+      <span @click="senmes">Написать сообщение</span>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     goToUserProfile(val) {
-      router.push("/user/" + val);
+      router.push("/user/" + this.id);
     },
     senmes() {
       this.$emit("writemessage", this.id);

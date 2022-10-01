@@ -10,11 +10,11 @@
     <p>{{ fio }}</p>
   </div>
   <div class="profile-menu">
-    <a href="#/mail">Сообщение: 12</a>
-    <a href="#/friends">Друзья: 54</a>
-    <a href="#/group">Группа: 33</a>
-    <a href="#/setting">Настройки</a>
-    <a href="#/exit">Выйти</a>
+    <a href="/mail">Сообщения</a>
+    <a href="/friends">Друзья</a>
+    <a href="/group">Группы</a>
+    <a href="/setting">Настройки</a>
+    <a href="/exit">Выйти</a>
   </div>
   <hr />
 </template>

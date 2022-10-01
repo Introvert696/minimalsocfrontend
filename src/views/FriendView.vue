@@ -47,7 +47,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/createdialog",
+        url: "http://localhost/createdialog",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -73,7 +73,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/friends",
+        url: "http://localhost/friends",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
