@@ -35,6 +35,7 @@ export default {
   mounted() {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
+      
     } else {
     }
   },
