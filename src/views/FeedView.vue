@@ -44,7 +44,7 @@ export default {
       bodyFormData.append("token", localStorage.token);
       axios({
         method: "post",
-        url: "http://localhost/feedpost/",
+        url: "http://apiminimalsoctest.com/feedpost/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

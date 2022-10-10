@@ -57,7 +57,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/createdialog",
+        url: "http://apiminimalsoctest.com/createdialog",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -84,7 +84,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/search/",
+        url: "http://apiminimalsoctest.com/search/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

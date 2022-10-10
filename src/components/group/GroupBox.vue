@@ -1,12 +1,7 @@
 <template>
   <div class="groupbox">
     <div class="image-side">
-      <img
-        src="@/assets/testImage.jpg"
-        alt="Фото группы"
-        width="50"
-        height="50"
-      />
+      <img :src="photo" alt="Фото группы" width="50" height="50" />
     </div>
     <div class="text-side">
       <p @click="goToProfileView(23)">{{ groupname }}</p>
@@ -22,6 +17,7 @@ export default {
   props: {
     groupname: String,
     quantitymember: String,
+    photo: String,
   },
   methods: {
     goToProfileView(val) {

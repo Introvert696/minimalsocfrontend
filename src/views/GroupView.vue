@@ -4,13 +4,12 @@
     <LeftColumn></LeftColumn>
     <CenterColumn>
       <CenterTitle title="Группы:"> </CenterTitle>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
-      <GroupBox groupname="Stream inside" quantitymember="200"></GroupBox>
+      <GroupBox
+        v-for="group in groups"
+        :groupname="group.groupname"
+        :photo="group.gr_photo"
+        quantitymember="200"
+      ></GroupBox>
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
@@ -22,6 +21,7 @@ import CenterColumn from "@/components/CenterColumn.vue";
 import RightColumn from "@/components/RightColumn.vue";
 import CenterTitle from "@/components/CenterTitle.vue";
 import GroupBox from "../components/group/GroupBox.vue";
+import axios from "axios";
 export default {
   name: "GroupView",
   components: {
@@ -32,11 +32,38 @@ export default {
     CenterTitle,
     GroupBox,
   },
+  data() {
+    return {
+      groups: [],
+    };
+  },
+  methods: {
+    getUsersGroup() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/getusergroup",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          this.groups = response.data;
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
+  },
   mounted() {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
-      
     } else {
+      this.getUsersGroup();
     }
   },
 };

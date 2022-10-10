@@ -42,7 +42,7 @@ export default {
       bodyFormData.append("token", localStorage.token);
       axios({
         method: "post",
-        url: "http://localhost/profileinfo/",
+        url: "http://apiminimalsoctest.com/profileinfo/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -64,7 +64,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/myposts/",
+        url: "http://apiminimalsoctest.com/myposts/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

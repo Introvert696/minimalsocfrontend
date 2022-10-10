@@ -1,5 +1,5 @@
 <template>
-  <form action="#">
+  <form @submit.prevent>
     <h6 class="notcorrect">{{ info }}</h6>
     <div class="text"><p>Вход в аккаунт</p></div>
     <InputField
@@ -51,7 +51,7 @@ export default {
       bodyFormData.append("password", this.password);
       axios({
         method: "post",
-        url: "http://localhost/authorize/",
+        url: "http://apiminimalsoctest.com/authorize/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
