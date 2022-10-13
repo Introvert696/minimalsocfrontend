@@ -4,7 +4,7 @@
       <img :src="photo" alt="Фото группы" width="50" height="50" />
     </div>
     <div class="text-side">
-      <p @click="goToProfileView(23)">{{ groupname }}</p>
+      <p @click="goToProfileView()">{{ groupname }}</p>
       <span>{{ quantitymember }} Подписчиков</span>
     </div>
   </div>
@@ -18,10 +18,11 @@ export default {
     groupname: String,
     quantitymember: String,
     photo: String,
+    id: String,
   },
   methods: {
-    goToProfileView(val) {
-      router.push("/group/" + val);
+    goToProfileView() {
+      router.push("/group/" + this.id);
     },
   },
 };

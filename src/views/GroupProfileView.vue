@@ -3,15 +3,18 @@
   <div class="main-content">
     <LeftColumn></LeftColumn>
     <CenterColumn>
-      <GroupProfileInfo groupname="Stream Inside"></GroupProfileInfo>
-      <FormCreatePost></FormCreatePost>
-      <PostBox
+      <GroupProfileInfo
+        :groupname="groupInfo.title"
+        :image="groupInfo.gr_photo"
+      ></GroupProfileInfo>
+      <!-- <FormCreatePost></FormCreatePost> -->
+      <!-- <PostBox
         creater="Stream inside"
         datecreate="22:23 12.04.2012"
         postcontent="Hello test"
         bt="1"
         wt="23"
-      ></PostBox>
+      ></PostBox> -->
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
@@ -24,6 +27,9 @@ import RightColumn from "@/components/RightColumn.vue";
 import GroupProfileInfo from "@/components/groupProfile/GroupProfileInfo.vue";
 import FormCreatePost from "@/components/FormCreatePost.vue";
 import PostBox from "@/components/PostBox.vue";
+
+import axios from "axios";
+import router from "@/router";
 export default {
   name: "GroupProfileView",
   components: {
@@ -35,10 +41,43 @@ export default {
     FormCreatePost,
     PostBox,
   },
+  data() {
+    return {
+      groupInfo: {},
+    };
+  },
+  methods: {
+    getGroupInfo() {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("groupId", this.$route.params.id);
+
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/getgroup/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          this.groupInfo = response.data[0];
+          console.log(response.data);
+          if (response.data == "") {
+          }
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          router.push("/404");
+          return false;
+        });
+    },
+  },
   mounted() {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
     } else {
+      this.getGroupInfo();
     }
   },
 };

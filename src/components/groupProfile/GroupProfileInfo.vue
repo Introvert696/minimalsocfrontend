@@ -1,6 +1,6 @@
 <template>
   <img
-    src="@/assets/testImage.jpg"
+    :src="image"
     alt="profileImage"
     width="150"
     height="150"
@@ -22,6 +22,7 @@ export default {
   name: "UserProfileInfo",
   props: {
     groupname: String,
+    image: String,
   },
 };
 </script>

@@ -8,6 +8,7 @@
         v-for="group in groups"
         :groupname="group.groupname"
         :photo="group.gr_photo"
+        :id="group.gr_id"
         quantitymember="200"
       ></GroupBox>
     </CenterColumn>
