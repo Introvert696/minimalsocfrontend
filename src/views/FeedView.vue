@@ -9,8 +9,8 @@
         :datecreate="post.create_at"
         :photo="post.user_photo"
         :postcontent="post.post_text"
-      ></PostBox
-    ></CenterColumn>
+      ></PostBox>
+    </CenterColumn>
     <RightColumn></RightColumn>
   </div>
 </template>

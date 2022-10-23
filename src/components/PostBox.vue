@@ -7,8 +7,12 @@
         <span>{{ datecreate }}</span>
       </div>
     </div>
+
     <div class="content-postbox">
       <p>{{ postcontent }}</p>
+    </div>
+    <div class="delete" v-on:click="deletepost">
+      <a><p>Удалить</p></a>
     </div>
     <div class="likes">
       <div class="dot">
@@ -26,12 +30,18 @@
 export default {
   name: "PostBox",
   props: {
+    id: String,
     creater: String,
     datecreate: String,
     photo: String,
     postcontent: String,
     bt: String,
     wt: String,
+  },
+  methods: {
+    deletepost() {
+      this.$emit("userchange");
+    },
   },
 };
 </script>
@@ -107,5 +117,18 @@ export default {
   height: 25px;
   border: #d9d9d9 1px solid;
   border-radius: 100px;
+}
+.delete {
+  font-size: 11px;
+  a {
+    text-align: right;
+    text-decoration: none;
+    color: #c9c9c9;
+    cursor: pointer;
+  }
+  :hover {
+    font-weight: 800;
+    color: #353535;
+  }
 }
 </style>

@@ -15,6 +15,15 @@
         bt="1"
         wt="23"
       ></PostBox> -->
+      <PostBox
+        v-for="post in groupPosts"
+        :id="post.post_id"
+        :creater="groupInfo.title"
+        :datecreate="post.create_at"
+        :photo="groupInfo.gr_photo"
+        :postcontent="post.post_text"
+        :userchange="deletepost"
+      ></PostBox>
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
@@ -44,9 +53,14 @@ export default {
   data() {
     return {
       groupInfo: {},
+      groupPosts: [],
     };
   },
   methods: {
+    deletepost() {
+      console.log(111);
+      alert(0);
+    },
     getGroupInfo() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
@@ -64,6 +78,7 @@ export default {
           console.log(response.data);
           if (response.data == "") {
           }
+          this.groupPosts = response.data[1];
           return response.data;
         })
         .catch((response) => {
