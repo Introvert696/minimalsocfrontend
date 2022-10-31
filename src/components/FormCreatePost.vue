@@ -34,7 +34,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://minimalsoc.eurodir.ru/createpost/",
+        url: "http://apiminimalsoctest.com/createpost/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

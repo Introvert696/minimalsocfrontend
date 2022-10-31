@@ -11,7 +11,7 @@
     <div class="content-postbox">
       <p>{{ postcontent }}</p>
     </div>
-    <div class="delete" v-on:click="deletepost">
+    <div class="delete" v-on:click="deletepost()">
       <a><p>Удалить</p></a>
     </div>
     <div class="likes">
@@ -30,7 +30,7 @@
 export default {
   name: "PostBox",
   props: {
-    id: String,
+    id: Number,
     creater: String,
     datecreate: String,
     photo: String,
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     deletepost() {
-      this.$emit("userchange");
+      this.$emit("userchange", this.id);
     },
   },
 };

@@ -5,6 +5,7 @@
     <CenterColumn>
       <PostBox
         v-for="post in posts"
+        :id="post.post_id"
         :creater="post.creater_user"
         :datecreate="post.create_at"
         :photo="post.user_photo"

@@ -3,17 +3,23 @@
   <div class="main-content">
     <LeftColumn></LeftColumn>
     <CenterColumn>
-      <MyProfileColumn
-        :userimage="userinfo.user_photo"
-        :fio="userinfo.fio"
-        :posts="posts"
-      >
+      <MyProfileColumn :userimage="userinfo.user_photo" :fio="userinfo.fio">
       </MyProfileColumn>
+      <PostBox
+        v-for="post in posts"
+        :id="post.post_id"
+        :creater="post.creater_user"
+        :datecreate="post.create_at"
+        :photo="post.user_photo"
+        :postcontent="post.post_text"
+        v-on:userchange="deletePost"
+      ></PostBox>
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
 </template>
 <script>
+import PostBox from "@/components/PostBox.vue";
 import MainHeader from "@/components/MainHeader.vue";
 import RightColumn from "@/components/RightColumn.vue";
 import LeftColumn from "@/components/LeftColumn.vue";
@@ -21,6 +27,7 @@ import MyProfileColumn from "@/components/MyProfileColumn.vue";
 import CenterColumn from "@/components/CenterColumn.vue";
 import axios from "axios";
 import router from "@/router";
+
 export default {
   name: "MyProfileView",
   components: {
@@ -29,6 +36,7 @@ export default {
     RightColumn,
     MyProfileColumn,
     CenterColumn,
+    PostBox,
   },
   data() {
     return {
@@ -37,6 +45,25 @@ export default {
     };
   },
   methods: {
+    deletePost(post_id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("postId", post_id);
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/deletepost",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          router.go("/myprofile");
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     getUserInfo() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
