@@ -8,8 +8,8 @@
         v-for="mes in mesGroup"
         userphoto="https://twitchpedia.ru/wp-content/uploads/2021/05/glad-valakas-2.jpg"
         :userfio="'Диалог: ' + mes.first_user + ' и ' + mes.twelf_user"
-        mesdesc="-"
         :mesgrid="mes.mgr_id"
+        v-on:delete="delteMes"
       ></MessageBox>
     </CenterColumn>
     <RightColumn></RightColumn>
@@ -23,6 +23,7 @@ import CenterColumn from "@/components/CenterColumn.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import CenterTitle from "@/components/CenterTitle.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "MailView",
   components: {
@@ -39,6 +40,27 @@ export default {
     };
   },
   methods: {
+    delteMes(val) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("mesGroupId", val);
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/deletemessagegroup",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          console.log(response);
+          router.go("/mail");
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     getUserMesGroup() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);

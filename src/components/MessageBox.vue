@@ -1,13 +1,13 @@
 <template>
-  <div class="mes-box" @click="goToMess">
+  <div class="mes-box">
     <div class="leftbox">
       <img :src="userphoto" alt="" width="50" height="50" />
     </div>
-    <div class="centerbox">
+    <div class="centerbox" @click="goToMess">
       <p>{{ userfio }}</p>
       <span>{{ mesdesc }}</span>
     </div>
-    <div class="rightbox">X</div>
+    <div class="rightbox" @click="deletegroup">X</div>
   </div>
 </template>
 <script>
@@ -22,6 +22,9 @@ export default {
     mesgrid: "",
   },
   methods: {
+    deletegroup() {
+      this.$emit("delete", this.mesgrid);
+    },
     goToMess() {
       router.push("/mail/" + this.mesgrid);
     },
