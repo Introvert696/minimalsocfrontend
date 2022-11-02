@@ -6,9 +6,9 @@
       <CenterTitle title="Друзья:"></CenterTitle>
       <FriendBox
         v-for="friend in friends"
-        :username="friend[0].fio"
-        :img="friend[0].user_photo"
-        :id="friend[0].id"
+        :username="friend.fio"
+        :img="friend.user_photo"
+        :id="friend.id"
         v-on:writemessage="writeMessage"
       ></FriendBox>
     </CenterColumn>
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     writeMessage(id) {
+      alert(id);
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
       bodyFormData.append("user_id", id);

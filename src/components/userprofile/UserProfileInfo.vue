@@ -11,7 +11,7 @@
   </div>
   <div class="profile-menu">
     <a href="">Написать сообщение</a>
-    <a href="">Добавить в друзья</a>
+    <a href="" @click="addtofriend">Добавить в друзья</a>
     <a href="">Друзья:12</a>
     <a href="">Группы: 1</a>
   </div>
@@ -20,7 +20,12 @@
 <script>
 export default {
   name: "UserProfileInfo",
-  props: ["img", "username"],
+  props: ["id", "img", "username"],
+  methods: {
+    addtofriend() {
+      this.$emit("addtofriend", this.id);
+    },
+  },
 };
 </script>
 <style lang="scss">

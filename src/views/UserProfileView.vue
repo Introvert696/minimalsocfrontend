@@ -4,8 +4,10 @@
     <LeftColumn></LeftColumn>
     <CenterColumn>
       <UserProfileInfo
+        :id="userinfo.id"
         :img="userinfo.user_photo"
         :username="userinfo.fio"
+        v-on:addtofriend="addToFriend"
       ></UserProfileInfo>
       <PostBox
         v-for="post in posts"
@@ -44,6 +46,31 @@ export default {
     };
   },
   methods: {
+    addToFriend(friend_id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("friend_id", friend_id);
+
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/addfriend",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+          console.log(response.data);
+          if (response.data == "") {
+            router.push("/404");
+          }
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     getUserInfo() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
@@ -51,13 +78,13 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/userprofile",
+        url: "http://apiminimalsoctest.com/userprofile",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
           //handle success
-          this.userinfo = response.data[0];
+          this.userinfo = response.data;
           console.log(response.data);
           if (response.data == "") {
             router.push("/404");
@@ -77,7 +104,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/myposts",
+        url: "http://apiminimalsoctest.com/myposts",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
