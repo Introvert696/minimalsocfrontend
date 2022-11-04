@@ -7,6 +7,9 @@
       <p @click="goToUserProfile">{{ username }}</p>
       <span @click="senmes">Написать сообщение</span>
     </div>
+    <div class="delete" @click="deletefriend">
+      <p>Удалить</p>
+    </div>
   </div>
 </template>
 <script>
@@ -20,6 +23,9 @@ export default {
     id: Number,
   },
   methods: {
+    deletefriend() {
+      this.$emit("delfriend", this.id);
+    },
     goToUserProfile(val) {
       router.push("/user/" + this.id);
     },
@@ -30,6 +36,12 @@ export default {
 };
 </script>
 <style lang="scss">
+.delete {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 25px;
+  color: #737373;
+}
 .friendbox {
   display: flex;
 

@@ -11,8 +11,8 @@
   </div>
   <div class="profile-menu">
     <a href="/mail">Сообщения</a>
-    <a href="/friends">Друзья</a>
-    <a href="/group">Группы</a>
+    <a href="/friend">Друзья</a>
+    <a href="/groups">Группы</a>
     <a href="/setting">Настройки</a>
     <a href="/exit">Выйти</a>
   </div>

@@ -10,6 +10,7 @@
         :img="friend.user_photo"
         :id="friend.id"
         v-on:writemessage="writeMessage"
+        v-on:delfriend="deleteFriend"
       ></FriendBox>
     </CenterColumn>
     <RightColumn></RightColumn>
@@ -40,8 +41,33 @@ export default {
     };
   },
   methods: {
+    deleteFriend(id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("friend_id", id);
+
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/deletefriend",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          //handle success
+
+          router.go("/friend");
+
+          console.log(response.data);
+
+          return response.data;
+        })
+        .catch((response) => {
+          //handle error
+          console.log(response);
+          return false;
+        });
+    },
     writeMessage(id) {
-      alert(id);
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
       bodyFormData.append("user_id", id);
