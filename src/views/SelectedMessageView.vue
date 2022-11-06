@@ -7,9 +7,11 @@
       <FormWitchMessages>
         <MessageBox
           v-for="im in message"
+          :id="im.message_id"
           :username="im.from_fio"
           :message="im.content"
           :send_date="im.send_at"
+          v-on:delete="deleteMessage"
         ></MessageBox>
       </FormWitchMessages>
       <InputMessage v-on:sendmessage="sendMessage"></InputMessage>
@@ -48,6 +50,28 @@ export default {
     };
   },
   methods: {
+    deleteMessage(id) {
+      var bodyFormData = new FormData();
+      bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("messageId", id);
+
+      axios({
+        method: "post",
+        url: "http://apiminimalsoctest.com/deletemessage/",
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          console.log(response);
+          this.$router.go();
+          return response.data;
+        })
+        .catch((response) => {
+          console.log(response);
+
+          return false;
+        });
+    },
     sendMessage(message) {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
@@ -82,6 +106,7 @@ export default {
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
+          console.log(response.data);
           this.message = response.data;
           return response.data;
         })
