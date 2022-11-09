@@ -16,8 +16,9 @@
 </template>
 <script>
 import axios from "axios";
+import router from "@/router";
 export default {
-  name: "FormCreatePost",
+  name: "GroupFormCreatePost",
   data() {
     return {
       post_content: "",
@@ -30,18 +31,19 @@ export default {
     createPost() {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
-      bodyFormData.append("post_text", this.post_content);
+      bodyFormData.append("groupId", this.$route.params.id);
+      bodyFormData.append("content", this.post_content);
 
       axios({
         method: "post",
-        url: "http://apiminimalsoctest.com/createpost/",
+        url: "http://apiminimalsoctest.com/creategrouppost/",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
           //handle success
-          this.userinfo = response.data[0];
-
+          this.userinfo = response.data;
+          router.go();
           return response.data;
         })
         .catch((response) => {

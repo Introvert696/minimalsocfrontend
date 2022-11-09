@@ -7,14 +7,10 @@
         :groupname="groupInfo.title"
         :image="groupInfo.gr_photo"
       ></GroupProfileInfo>
-      <!-- <FormCreatePost></FormCreatePost> -->
-      <!-- <PostBox
-        creater="Stream inside"
-        datecreate="22:23 12.04.2012"
-        postcontent="Hello test"
-        bt="1"
-        wt="23"
-      ></PostBox> -->
+      <GroupFormCreatePost
+        v-if="groupInfo['group_creater'] == groupInfo['0']"
+        @createPost="creategrouppost"
+      ></GroupFormCreatePost>
       <PostBox
         v-for="post in groupPosts"
         :id="post.post_id"
@@ -34,7 +30,7 @@ import LeftColumn from "@/components/LeftColumn.vue";
 import CenterColumn from "@/components/CenterColumn.vue";
 import RightColumn from "@/components/RightColumn.vue";
 import GroupProfileInfo from "@/components/groupProfile/GroupProfileInfo.vue";
-import FormCreatePost from "@/components/FormCreatePost.vue";
+import GroupFormCreatePost from "@/components/GroupFormCreatePost.vue";
 import PostBox from "@/components/PostBox.vue";
 
 import axios from "axios";
@@ -47,7 +43,7 @@ export default {
     CenterColumn,
     RightColumn,
     GroupProfileInfo,
-    FormCreatePost,
+    GroupFormCreatePost,
     PostBox,
   },
   data() {
@@ -57,6 +53,9 @@ export default {
     };
   },
   methods: {
+    creategrouppost(desk) {
+      alert(desk);
+    },
     deletepost() {
       console.log(111);
       alert(0);
