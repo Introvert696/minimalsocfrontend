@@ -1,17 +1,23 @@
 <template>
   <div class="title">
     <p>{{ title }}</p>
-    <p class="link">{{ linkname }}</p>
+    <p class="link" @click="gotolink">{{ linkname }}</p>
   </div>
   <hr class="divider" />
 </template>
 <script>
+import router from "@/router";
 export default {
   name: "CenterTitle",
   props: {
     title: String,
     linkname: String,
     linkurl: String,
+  },
+  methods: {
+    gotolink() {
+      router.push(this.linkurl);
+    },
   },
 };
 </script>

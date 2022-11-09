@@ -13,6 +13,7 @@ import DocsView from "@/views/DocsView";
 import SearchView from "@/views/SearchView";
 import UserProfileView from "@/views/UserProfileView";
 import GroupProfileView from "@/views/GroupProfileView";
+import CreateGroupView from "@/views/CreateGroupView";
 
 const routes = [
   {
@@ -92,6 +93,12 @@ const routes = [
     name: "groupprofile",
     meta: { title: "Профиль группы" },
     component: GroupProfileView,
+  },
+  {
+    path: "/group/create",
+    name: "groupcreate",
+    meta: { title: "Создание группы" },
+    component: CreateGroupView,
   },
   {
     path: "/:pathMatch(.*)*",

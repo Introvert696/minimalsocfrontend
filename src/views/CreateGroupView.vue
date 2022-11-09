@@ -3,19 +3,7 @@
   <div class="main-content">
     <LeftColumn></LeftColumn>
     <CenterColumn>
-      <CenterTitle
-        title="Группы:"
-        linkname="Создать группу"
-        linkurl="/group/create"
-      >
-      </CenterTitle>
-      <GroupBox
-        v-for="group in groups"
-        :groupname="group.groupname"
-        :photo="group.gr_photo"
-        :id="group.gr_id"
-        quantitymember="200"
-      ></GroupBox>
+      <groupInfo @creategroup="createGroup"> </groupInfo>
     </CenterColumn>
     <RightColumn></RightColumn>
   </div>
@@ -27,7 +15,9 @@ import CenterColumn from "@/components/CenterColumn.vue";
 import RightColumn from "@/components/RightColumn.vue";
 import CenterTitle from "@/components/CenterTitle.vue";
 import GroupBox from "../components/group/GroupBox.vue";
+import groupInfo from "@/components/createGroup/groupInfo.vue";
 import axios from "axios";
+import router from "@/router";
 export default {
   name: "GroupView",
   components: {
@@ -37,25 +27,29 @@ export default {
     RightColumn,
     CenterTitle,
     GroupBox,
+    groupInfo,
   },
   data() {
     return {
-      groups: [],
+      groupInfo: {},
     };
   },
   methods: {
-    getUsersGroup() {
+    createGroup(title, desk) {
       var bodyFormData = new FormData();
       bodyFormData.append("token", localStorage.token);
+      bodyFormData.append("title", title);
+      bodyFormData.append("desk", desk);
       axios({
         method: "post",
-        url: "http://apiminimalsoctest.com/getusergroup",
+        url: "http://apiminimalsoctest.com/creategroup",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
           //handle success
-          this.groups = response.data;
+          router.push("/group/" + response.data["id"]);
+          //console.log(response);
           return response.data;
         })
         .catch((response) => {
@@ -69,7 +63,6 @@ export default {
     if (typeof localStorage.token === "undefined") {
       router.push("/");
     } else {
-      this.getUsersGroup();
     }
   },
 };
